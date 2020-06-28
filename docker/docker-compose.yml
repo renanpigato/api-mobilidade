@@ -1,0 +1,22 @@
+version: '3'
+services:
+  database:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: api_mobilidade
+      POSTGRES_USER: apimobilidade
+      POSTGRES_PASSWORD: passwd
+    volumes:
+      - "./database:/var/lib/postgresql/data"
+    ports:
+      - "6432:5432"
+
+  swagger:
+    build:
+      context: .
+      dockerfile: ./swagger/Dockerfile
+    volumes:
+      - "./openapi.json:/openapi.json"
+    ports:
+      - "8081:8080"
+

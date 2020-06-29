@@ -1,21 +1,29 @@
 package com.apimobilidade.resources;
 
 import java.util.List;
-import java.util.ListIterator;
 
-import com.apimobilidade.entity.GeoPosition;
-import com.apimobilidade.resources.linha.Onibus;
+import com.apimobilidade.classes.Localizacao;
 
 public class Itinerario {
 
-	private Onibus linha;
-	private List<GeoPosition> localizacoes;
+	private LinhaOnibus linha;
+	private List<Localizacao> localizacoes;
+	
 	
 	/**
 	 * @param linha
 	 * @param localizacoes
 	 */
-	public Itinerario(Onibus linha, List<GeoPosition> localizacoes) {
+	public Itinerario(LinhaOnibus linha) {
+		super();
+		this.linha = linha;
+	}
+	
+	/**
+	 * @param linha
+	 * @param localizacoes
+	 */
+	public Itinerario(LinhaOnibus linha, List<Localizacao> localizacoes) {
 		super();
 		this.linha = linha;
 		this.localizacoes = localizacoes;
@@ -24,28 +32,32 @@ public class Itinerario {
 	/**
 	 * @return the linha
 	 */
-	public Onibus getLinha() {
+	public LinhaOnibus getLinha() {
 		return linha;
 	}
 
 	/**
 	 * @return the localizacoes
 	 */
-	public List<GeoPosition> getLocalizacoes() {
+	public List<Localizacao> getLocalizacoes() {
 		return localizacoes;
 	}
 
 	/**
 	 * @param linha the linha to set
 	 */
-	public void setLinha(Onibus linha) {
+	public void setLinha(LinhaOnibus linha) {
 		this.linha = linha;
 	}
 
 	/**
 	 * @param localizacoes the localizacoes to set
 	 */
-	public void setLocalizacoes(List<GeoPosition> localizacoes) {
+	public void setLocalizacoes(List<Localizacao> localizacoes) {
 		this.localizacoes = localizacoes;
+	}
+	
+	public void addLocalizacao(Localizacao l) {
+		this.localizacoes.add(l);
 	}
 }

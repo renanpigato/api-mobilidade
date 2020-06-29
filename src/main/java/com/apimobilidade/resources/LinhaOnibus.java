@@ -1,18 +1,15 @@
-package com.apimobilidade.poatransporte.resources.linha;
+package com.apimobilidade.resources;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+public class LinhaOnibus {
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Onibus {
-	
-	private long id;
+	private Long id;
 	private String codigo;
 	private String nome;
 	
 	/**
 	 * 
 	 */
-	public Onibus() {
+	public LinhaOnibus() {
 		super();
 	}
 
@@ -21,7 +18,7 @@ public class Onibus {
 	 * @param codigo
 	 * @param nome
 	 */
-	public Onibus(long id, String codigo, String nome) {
+	public LinhaOnibus(Long id, String codigo, String nome) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -31,7 +28,7 @@ public class Onibus {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
@@ -46,11 +43,11 @@ public class Onibus {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -72,8 +69,8 @@ public class Onibus {
 	public String toString() {
 		return "Onibus {" +
 	        "id=" + this.id + 
-	        ", codigo=" + this.codigo +
-	        ", nome=" + this.nome +
+	        ", codigo='" + this.codigo + "'" +
+	        ", nome='" + this.nome + "'" +
         '}';
 	}
 }

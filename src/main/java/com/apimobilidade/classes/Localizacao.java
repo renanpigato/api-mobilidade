@@ -1,6 +1,6 @@
-package com.apimobilidade.entity;
+package com.apimobilidade.classes;
 
-public class GeoPosition {
+public class Localizacao {
 
 	private double latitude;
 	private double longitude;
@@ -9,7 +9,7 @@ public class GeoPosition {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public GeoPosition(double latitude, double longitude) {
+	public Localizacao(double latitude, double longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;

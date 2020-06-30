@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -21,6 +23,7 @@ public class Itinerario {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "linha_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@Fetch(FetchMode.JOIN)
 	private Linha linha;
 	
 	private Double latitude;

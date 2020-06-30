@@ -9,6 +9,8 @@ public class Itinerario {
 	private LinhaOnibus linha;
 	private List<Localizacao> localizacoes;
 	
+	public Itinerario() {
+	}
 	
 	/**
 	 * @param linha
@@ -59,5 +61,13 @@ public class Itinerario {
 	
 	public void addLocalizacao(Localizacao l) {
 		this.localizacoes.add(l);
+	}
+	
+	@Override
+	public String toString() {
+		return "Itinerario {" +
+	        "LinhaOnibus=" + this.linha + 
+	        ", Localizacoes=[" + this.localizacoes + "]" +
+        '}';
 	}
 }

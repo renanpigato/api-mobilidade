@@ -3,16 +3,19 @@ package com.apimobilidade.provider;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import com.apimobilidade.classes.Localizacao;
 import com.apimobilidade.collection.Itinerarios;
 import com.apimobilidade.entity.Itinerario;
 import com.apimobilidade.entity.Linha;
 import com.apimobilidade.provider.repository.ItinerarioRepository;
+import com.apimobilidade.provider.repository.LinhaRepository;
 import com.apimobilidade.resources.LinhaOnibus;
 
 public class ItinerariosProvider {
 	
+	private LinhaRepository linhaRepository; 
 	private ItinerarioRepository itinerarioRepository;
 	private Long idLinha;
 	
@@ -25,10 +28,12 @@ public class ItinerariosProvider {
 	 * @param idLinha
 	 */
 	public ItinerariosProvider(
+		LinhaRepository linhaRepository,
 		ItinerarioRepository itinerarioRepository,
 		Long idLinha
 	) {
 		super();
+		this.linhaRepository = linhaRepository;
 		this.itinerarioRepository = itinerarioRepository;
 		this.idLinha = idLinha;
 	}
@@ -73,11 +78,23 @@ public class ItinerariosProvider {
 	}
 	
 	public void run() {
+			
+		Optional<Linha> linhaOnibus = this.linhaRepository.findByIdLinha(this.idLinha);
 		
-		Iterator<Itinerario> itinerariosIt;	
-		itinerariosIt = this.itinerarioRepository.findAllByLinha(new Linha(idLinha)).iterator();
+		if (linhaOnibus.equals(Optional.empty())) {
+			return;
+		}
 		
-		List<Localizacao> localizacoes = new ArrayList<Localizacao>();
+		Long linhaId = linhaOnibus.get().getId();
+		List<Itinerario> itinerarios = this.itinerarioRepository.findAllByLinhaId(linhaId);
+		
+		if (itinerarios.size() == 0) {
+			return;
+		}
+			
+		Iterator<Itinerario> itinerariosIt = itinerarios.iterator();
+		
+		ArrayList<Localizacao> localizacoes = new ArrayList<Localizacao>();
 		Itinerario itinerario = new Itinerario();
 		
 		while (itinerariosIt.hasNext()) {

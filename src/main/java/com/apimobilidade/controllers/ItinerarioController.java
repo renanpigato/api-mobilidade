@@ -10,6 +10,7 @@ import com.apimobilidade.exception.ResourceNotFoundException;
 import com.apimobilidade.provider.ItinerariosProvider;
 import com.apimobilidade.provider.integration.PoaTransporte;
 import com.apimobilidade.provider.repository.ItinerarioRepository;
+import com.apimobilidade.provider.repository.LinhaRepository;
 import com.apimobilidade.service.ItinerariosService;
 
 @RestController
@@ -19,8 +20,11 @@ public class ItinerarioController {
 	
 	@Autowired
 	private ItinerarioRepository itinerarioRepository;
+	
+	@Autowired
+	private LinhaRepository linhaRepository;
 
-	@GetMapping("/itinerario")
+	@GetMapping("/itinerarios")
 	public Itinerarios itinerario(
 		@RequestParam(defaultValue = "", value = "lat") Double latitude,
 		@RequestParam(defaultValue = "", value = "lng") Double longitude,
@@ -33,6 +37,7 @@ public class ItinerarioController {
 		itinerariosService.refreshLinhaRepository();
 				
 		ItinerariosProvider providerItinerarios = new ItinerariosProvider(
+			this.linhaRepository,
 			this.itinerarioRepository,
 			idLinha
 		);

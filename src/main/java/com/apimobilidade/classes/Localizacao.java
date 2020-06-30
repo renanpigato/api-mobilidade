@@ -39,4 +39,12 @@ public class Localizacao {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	
+	@Override
+	public String toString() {
+		return "Localizacao {" + 
+	        "latitude=" + this.latitude +
+	        ", longitude=" + this.longitude +
+        '}';
+	}
 }

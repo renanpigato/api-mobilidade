@@ -67,7 +67,7 @@ public class LinhaOnibus {
 
 	@Override
 	public String toString() {
-		return "Onibus {" +
+		return "LinhaOnibus {" +
 	        "id=" + this.id + 
 	        ", codigo='" + this.codigo + "'" +
 	        ", nome='" + this.nome + "'" +

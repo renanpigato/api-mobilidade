@@ -16,10 +16,6 @@ public class ItinerariosService {
 	}
 
 	public void refreshLinhaRepository() {
-		System.out.println(
-			this.itinerarios
-			+ " - " +
-			this.itinerarioRepository
-		);
+		System.out.println(this.itinerarios);
 	}
 }

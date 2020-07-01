@@ -3,6 +3,7 @@ package com.apimobilidade.resources;
 public class LinhaOnibus {
 
 	private Long id;
+	private Long idLinha;
 	private String codigo;
 	private String nome;
 	
@@ -14,13 +15,13 @@ public class LinhaOnibus {
 	}
 
 	/**
-	 * @param id
+	 * @param idLinha
 	 * @param codigo
 	 * @param nome
 	 */
-	public LinhaOnibus(Long id, String codigo, String nome) {
+	public LinhaOnibus(Long idLinha, String codigo, String nome) {
 		super();
-		this.id = id;
+		this.idLinha = idLinha;
 		this.codigo = codigo;
 		this.nome = nome;
 	}
@@ -30,6 +31,13 @@ public class LinhaOnibus {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	/**
+	 * @return the idLinha
+	 */
+	public Long getIdLinha() {
+		return idLinha;
 	}
 	/**
 	 * @return the codigo
@@ -52,6 +60,13 @@ public class LinhaOnibus {
 	}
 
 	/**
+	 * @param idLinha the idLinha to set
+	 */
+	public void setIdLinha(Long idLinha) {
+		this.idLinha = idLinha;
+	}
+
+	/**
 	 * @param codigo the codigo to set
 	 */
 	public void setCodigo(String codigo) {
@@ -68,7 +83,8 @@ public class LinhaOnibus {
 	@Override
 	public String toString() {
 		return "LinhaOnibus {" +
-	        "id=" + this.id + 
+			"id=" + this.id +
+	        ", idLinha=" + this.idLinha + 
 	        ", codigo='" + this.codigo + "'" +
 	        ", nome='" + this.nome + "'" +
         '}';

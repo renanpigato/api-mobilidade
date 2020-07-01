@@ -3,7 +3,7 @@ package com.apimobilidade.service;
 import java.util.Iterator;
 import java.util.Optional;
 
-import com.apimobilidade.collection.LinhasOnibus;
+import com.apimobilidade.classes.LinhasOnibusPoaTransporte;
 import com.apimobilidade.entity.Linha;
 import com.apimobilidade.provider.repository.LinhaRepository;
 import com.apimobilidade.resources.LinhaOnibus;
@@ -24,7 +24,10 @@ public class LinhasOnibusService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void refreshLinhaRepository(LinhasOnibus linhasOnibus) {
+	public void refreshLinhaRepository(LinhasOnibusPoaTransporte linhasOnibus) {
+		
+		// System.out.println("LinhasOnibus: "+ linhasOnibus.size());
+		// System.out.println("LinhasRepository: "+ (int)this.linhaRepository.count());
 		
 		if (linhasOnibus.size() == 0) {
 			return;
@@ -34,17 +37,19 @@ public class LinhasOnibusService {
 			return;
 		}
 
-		Iterator<LinhaOnibus> linhasIntegrationIt = (Iterator<LinhaOnibus>) linhasOnibus.values();
+		Iterator<LinhaOnibus> linhasIntegrationIt = linhasOnibus.iterator();
 		
 		while(linhasIntegrationIt.hasNext()) {
 			
 			LinhaOnibus linhaIntegration = (LinhaOnibus) linhasIntegrationIt.next();
-			Optional<Linha> linhaEncontrada = this.linhaRepository.findByIdLinha(linhaIntegration.getIdLinha());
+			Optional<Linha> linhaEncontrada = this.linhaRepository.findByIdLinha(linhaIntegration.getId());
+			
+			System.out.println("LinhaIntegration: "+ linhaIntegration);
 			
 			if (linhaEncontrada.equals(Optional.empty())) {
 			
 				Linha l = new Linha(
-					linhaIntegration.getIdLinha(),
+					linhaIntegration.getId(),
 					linhaIntegration.getCodigo(),
 					linhaIntegration.getNome(),
 					new String("O")

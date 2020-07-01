@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
+import com.apimobilidade.classes.LinhasOnibusPoaTransporte;
 import com.apimobilidade.classes.ListaItinerarioPoaTransporte;
 import com.apimobilidade.collection.LinhasOnibus;
 import com.apimobilidade.resources.LinhaOnibus;
@@ -20,7 +21,7 @@ public class PoaTransporte {
 	private RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
 	private LinhaOnibus linhaOnibus;
 	
-	public LinhasOnibus getLinhasOnibus() {
+	public LinhasOnibusPoaTransporte getLinhasOnibus() {
 		
 		RestTemplate restTemplate = restTemplateBuilder.build();
 		
@@ -36,15 +37,17 @@ public class PoaTransporte {
 		try {
 			
 			ObjectMapper objMapper = new ObjectMapper();
-			LinhasOnibus linhas = objMapper.readValue(
+			LinhasOnibusPoaTransporte linhas = objMapper.readValue(
 				linhasOnibusString,
-				LinhasOnibus.class
+				LinhasOnibusPoaTransporte.class
 			);
 			
 			return linhas;
 			
 		} catch (Exception e) {
-			return new LinhasOnibus();
+			System.out.println(linhasOnibusString);
+			System.out.println(e.getMessage());
+			return new LinhasOnibusPoaTransporte();
 		}
 	}
 	

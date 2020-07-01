@@ -10,57 +10,40 @@ import com.apimobilidade.resources.LinhaOnibus;
 
 public class LinhasOnibusService {
 	
-	LinhasOnibus linhasOnibus;
-	LinhaRepository linhaRepository;
+	private LinhaRepository linhaRepository;
 
 	/**
 	 * @param linhasIntegration
 	 * @param linhaRepository
 	 */
 	public LinhasOnibusService(
-		LinhasOnibus linhasIntegration,
 		LinhaRepository linhaRepository
 	) {
 		super();
-		this.linhasOnibus = linhasIntegration;
 		this.linhaRepository = linhaRepository;
 	}
 
-	/**
-	 * @return the linhasIntegration
-	 */
-	public LinhasOnibus getLinhasIntegration() {
-		return linhasOnibus;
-	}
-
-	/**
-	 * @return the linhaRepository
-	 */
-	public LinhaRepository getLinhaRepository() {
-		return linhaRepository;
-	}
-
-	public void refreshLinhaRepository() {
+	public void refreshLinhaRepository(LinhasOnibus linhasOnibus) {
 		
-		if (this.linhasOnibus.size() == 0) {
+		if (linhasOnibus.size() == 0) {
 			return;
 		}
 		
-		if ((int)this.linhaRepository.count() == this.linhasOnibus.size()) {	
+		if ((int)this.linhaRepository.count() == linhasOnibus.size()) {	
 			return;
 		}
 
-		Iterator<LinhaOnibus> linhasIntegrationIt = this.linhasOnibus.iterator();
+		Iterator<LinhaOnibus> linhasIntegrationIt = linhasOnibus.iterator();
 		
 		while(linhasIntegrationIt.hasNext()) {
 			
 			LinhaOnibus linhaIntegration = (LinhaOnibus) linhasIntegrationIt.next();
-			Optional<Linha> linhaEncontrada = this.linhaRepository.findByIdLinha(linhaIntegration.getId());
+			Optional<Linha> linhaEncontrada = this.linhaRepository.findByIdLinha(linhaIntegration.getIdLinha());
 			
 			if (linhaEncontrada.equals(Optional.empty())) {
 			
 				Linha l = new Linha(
-					linhaIntegration.getId(),
+					linhaIntegration.getIdLinha(),
 					linhaIntegration.getCodigo(),
 					linhaIntegration.getNome(),
 					new String("O")
@@ -69,6 +52,27 @@ public class LinhasOnibusService {
 				this.linhaRepository.save(l);
 			}
 		}
+	}
+
+	public LinhaOnibus refreshLinhaOnibus(LinhaOnibus linhaOnibus) {
+
+		Optional<Linha> linhaEncontrada = this.linhaRepository.findByIdLinha(linhaOnibus.getIdLinha());
+		Linha l = new Linha();
+		l.setTipo(new String("O"));
+		
+		if (!linhaEncontrada.equals(Optional.empty())) {
+			l = linhaEncontrada.get();
+		}
+			
+		l.setIdLinha(linhaOnibus.getIdLinha());
+		l.setCodigo(linhaOnibus.getCodigo());
+		l.setNome(linhaOnibus.getNome());
+
+		l = this.linhaRepository.save(l);
+		
+		linhaOnibus.setId(l.getId());
+		
+		return linhaOnibus;
 	}
 
 }

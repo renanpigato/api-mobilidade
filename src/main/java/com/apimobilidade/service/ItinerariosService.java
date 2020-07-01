@@ -4,10 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import com.apimobilidade.classes.ItinerarioPoaTransporte;
+import com.apimobilidade.classes.ListaItinerarioPoaTransporte;
 import com.apimobilidade.classes.Localizacao;
 import com.apimobilidade.entity.Linha;
-import com.apimobilidade.provider.integration.ItinerarioPoaTransporte;
-import com.apimobilidade.provider.integration.ListaItinerarioPoaTransporte;
 import com.apimobilidade.provider.repository.ItinerarioRepository;
 import com.apimobilidade.provider.repository.LinhaRepository;
 import com.apimobilidade.resources.Itinerario;

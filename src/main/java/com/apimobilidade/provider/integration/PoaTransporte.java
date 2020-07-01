@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
+import com.apimobilidade.classes.ListaItinerarioPoaTransporte;
 import com.apimobilidade.collection.LinhasOnibus;
 import com.apimobilidade.resources.LinhaOnibus;
 import com.fasterxml.jackson.databind.ObjectMapper;

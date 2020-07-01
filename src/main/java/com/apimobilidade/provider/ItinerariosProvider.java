@@ -112,6 +112,7 @@ public class ItinerariosProvider {
 		this.itinerarios.add(
 			new com.apimobilidade.resources.Itinerario(
 				new LinhaOnibus(
+					itinerario.getLinha().getId(),
 					itinerario.getLinha().getIdLinha(),
 					itinerario.getLinha().getCodigo(),
 					itinerario.getLinha().getNome()

@@ -6,9 +6,12 @@ import java.util.Optional;
 
 import com.apimobilidade.classes.Localizacao;
 import com.apimobilidade.entity.Linha;
+import com.apimobilidade.provider.integration.ItinerarioPoaTransporte;
+import com.apimobilidade.provider.integration.ListaItinerarioPoaTransporte;
 import com.apimobilidade.provider.repository.ItinerarioRepository;
 import com.apimobilidade.provider.repository.LinhaRepository;
 import com.apimobilidade.resources.Itinerario;
+import com.apimobilidade.resources.LinhaOnibus;
 
 public class ItinerariosService {
 	
@@ -23,8 +26,31 @@ public class ItinerariosService {
 		this.itinerarioRepository = itinerarioRepository;
 	}
 
-	public void refreshItinerariosWithIntegration(String itinerarios) {
-		System.out.println(itinerarios);
+	public void refreshItinerariosWithIntegration(ListaItinerarioPoaTransporte itinerarios, LinhaOnibus linha) {
+		
+		Iterator<ItinerarioPoaTransporte> iterator = itinerarios.iterator();
+		
+		while (iterator.hasNext()) {
+			
+			ItinerarioPoaTransporte itinerarioPoaTransporte = (ItinerarioPoaTransporte) iterator.next();
+			Optional<com.apimobilidade.entity.Itinerario> itinerarioEncontrado = this.itinerarioRepository
+				.findByLatitudeAndLongitudeAndLinhaId(
+					new Double(itinerarioPoaTransporte.getLat()),
+					new Double(itinerarioPoaTransporte.getLng()),
+					linha.getIdLinha()
+				);
+			
+			if (itinerarioEncontrado.equals(Optional.empty())) {
+				
+				Optional<Linha> linhaEntity = this.linhaRepository.findByIdLinha(linha.getIdLinha());
+				
+				this.itinerarioRepository.save(new com.apimobilidade.entity.Itinerario(
+					linhaEntity.get(),
+					new Double(itinerarioPoaTransporte.getLat()),
+					new Double(itinerarioPoaTransporte.getLng())
+				));
+			}
+		}
 	}
 	
 	public Itinerario refreshItinerario(Itinerario itinerario) {

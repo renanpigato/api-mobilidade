@@ -1,6 +1,6 @@
 version: '3'
 services:
-  database:
+  database_api_mobilidade:
     image: postgres:11-alpine
     environment:
       POSTGRES_DB: api_mobilidade
@@ -11,12 +11,16 @@ services:
     ports:
       - "6432:5432"
 
-  swagger:
+  java_api_mobilidade:
+    environment:
+      PATH: /opt/java/maven/apache-maven-3.6.3/bin:$PATH
+      JAVA_HOME: /opt/java/jdk/jdk-13.0.2
     build:
       context: .
-      dockerfile: ./swagger/Dockerfile
+      dockerfile: ./java/Dockerfile
     volumes:
-      - "./openapi.json:/openapi.json"
+      - "../:/home/app"
     ports:
-      - "8081:8080"
-
+      - "8080:8080"
+    depends_on: 
+      - database_api_mobilidade

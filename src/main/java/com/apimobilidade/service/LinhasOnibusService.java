@@ -23,6 +23,7 @@ public class LinhasOnibusService {
 		this.linhaRepository = linhaRepository;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void refreshLinhaRepository(LinhasOnibus linhasOnibus) {
 		
 		if (linhasOnibus.size() == 0) {
@@ -33,7 +34,7 @@ public class LinhasOnibusService {
 			return;
 		}
 
-		Iterator<LinhaOnibus> linhasIntegrationIt = linhasOnibus.iterator();
+		Iterator<LinhaOnibus> linhasIntegrationIt = (Iterator<LinhaOnibus>) linhasOnibus.values();
 		
 		while(linhasIntegrationIt.hasNext()) {
 			

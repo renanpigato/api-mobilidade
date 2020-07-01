@@ -25,7 +25,21 @@ public class LinhaOnibus {
 		this.codigo = codigo;
 		this.nome = nome;
 	}
-	
+
+	/**
+	 * @param id
+	 * @param idLinha
+	 * @param codigo
+	 * @param nome
+	 */
+	public LinhaOnibus(Long id, Long idLinha, String codigo, String nome) {
+		super();
+		this.id = id;
+		this.idLinha = idLinha;
+		this.codigo = codigo;
+		this.nome = nome;
+	}
+
 	/**
 	 * @return the id
 	 */

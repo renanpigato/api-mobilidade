@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.apimobilidade.entity.Itinerario;
 
-public interface ItinerarioRepository extends PagingAndSortingRepository<Itinerario, Integer> {
+public interface ItinerarioRepository extends PagingAndSortingRepository<Itinerario, Long> {
 
 	List<Itinerario> findAllByLinhaId(long linha_id);
 	

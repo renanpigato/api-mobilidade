@@ -1,0 +1,10 @@
+.gitignore
+.mvn/
+.classpath
+.project
+.settings/
+bin/
+docker/database/
+target/
+mvnw
+mvnw.cmd

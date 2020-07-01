@@ -50,7 +50,10 @@ public class ItinerarioController {
 			this.linhaRepository,
 			this.itinerarioRepository
 		);
-		itinerariosService.refreshItinerariosWithIntegration(this.integrationPoaTransporte.getItinerarios(idLinha));
+		itinerariosService.refreshItinerariosWithIntegration(
+			this.integrationPoaTransporte.getItinerarios(idLinha),
+			this.integrationPoaTransporte.getLinha()
+		);
 				
 		ItinerariosProvider providerItinerarios = new ItinerariosProvider(
 			this.linhaRepository,

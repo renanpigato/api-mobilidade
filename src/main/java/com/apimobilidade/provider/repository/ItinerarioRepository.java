@@ -14,4 +14,11 @@ public interface ItinerarioRepository extends PagingAndSortingRepository<Itinera
 	List<Itinerario> findAllByLatitudeAndLongitude(double latitude, double longitude);
 	
 	Optional<Itinerario> findByLatitudeAndLongitudeAndLinhaId(Double latitude, Double longitude, Long linha_id);
+	
+	List<Itinerario> findAllByLatitudeBetweenOrLongitudeBetween(
+		double latitudeMinima,
+		double latitudeMaxima,
+		double longitudeMinima,
+		double longitudeMaxima
+	);
 }

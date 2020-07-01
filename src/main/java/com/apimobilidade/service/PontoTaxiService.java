@@ -35,12 +35,13 @@ public class PontoTaxiService {
 		);
 		
 		if (ptoTaxiEncontrado.equals(Optional.empty())) {
+			
 			ptoTaxi.setId(this.providerPtoTaxi.getNextId());
-		} else {
-			ptoTaxi.setId(ptoTaxiEncontrado.get().getId());
+			return this.providerPtoTaxi.save(ptoTaxi);
 		}
 		
-		return this.providerPtoTaxi.save(ptoTaxi);
+		ptoTaxi.setId(ptoTaxiEncontrado.get().getId());
+		return ptoTaxi;
 	}
 
 }

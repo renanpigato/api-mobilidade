@@ -59,7 +59,7 @@ public class PontoTaxiProvider {
 			}
 			
 			if (Pattern.compile(regex).matcher(linha).matches()) {
-				LAST_ID = Long.getLong(linha.replaceAll(regex, "$1"));
+				LAST_ID = new Long(linha.replaceAll(regex, "$1"));
 				continue;
 			}
 			
@@ -131,14 +131,14 @@ public class PontoTaxiProvider {
 			text += "\n";
 		}
 		
-		text += "LAST_ID=" + LAST_ID;
+		text += "LAST_ID=" + LAST_ID.toString();
 		text += "\n";
 		
 		String filename = new String(PATH_FILE);
 		
 		try {
 			
-			FileOutputStream f = new FileOutputStream(filename, true);
+			FileOutputStream f = new FileOutputStream(filename, false);
 			
 			byte[] bts = text.getBytes();
 			

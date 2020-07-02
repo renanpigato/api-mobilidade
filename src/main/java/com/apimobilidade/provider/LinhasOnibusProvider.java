@@ -65,10 +65,10 @@ public class LinhasOnibusProvider {
 		} else if (this.raio > 0) {
 			
 			this.localizacao.calcularRaioAtuacao(this.raio * 1000);
-			
+			// System.out.println("Localizacao: "+ this.localizacao);
 			
 			List<Itinerario> itinerarios = this.itinerarioRepository
-				.findAllByLatitudeBetweenOrLongitudeBetween(
+				.findAllByLatitudeBetweenAndLongitudeBetween(
 					this.localizacao.getMinimaLatitude(),
 					this.localizacao.getMaximaLatitude(),
 					this.localizacao.getMinimaLongitude(),
